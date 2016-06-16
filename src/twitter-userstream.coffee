@@ -61,7 +61,7 @@ class Twitter extends Hubot.Adapter
 
       stream.on 'tweet', (tweet) =>
         return if @botUser.id == tweet.user.id
-        user = @robot.brain.userForId tweet.user.id, {name: tweet.user.screen_name, room: 'Twitter'}
+        user = @robot.brain.userForId tweet.user.screen_name, {name: tweet.user.screen_name, room: 'Twitter'}
         tmsg = new Hubot.TextMessage(user, tweet.text, tweet.id_str)
         tmsg.data = tweet
         @receive tmsg
@@ -69,7 +69,7 @@ class Twitter extends Hubot.Adapter
       stream.on 'direct_message', (message) =>
         message = message.direct_message
         return if @botUser.id == message.sender.id
-        user = @robot.brain.userForId message.sender.id, {name: message.sender.screen_name, room: 'TwitterDirectMessage'}
+        user = @robot.brain.userForId message.sender.screen_name, {name: message.sender.screen_name, room: 'TwitterDirectMessage'}
         tmsg = new Hubot.TextMessage(user, "@#{@robot.name} #{message.text}", message.id_str)
         tmsg.data = message
         @receive tmsg
